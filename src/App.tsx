@@ -1,7 +1,11 @@
 import  { useState } from "react";
 import Stepper from "./components/Stepper";
 import StepperControl from "./components/StepperControl";
-import { UseContextProvider } from "./contexts/StepperContext";
+import { StepperContextProvider } from "./contexts/StepperContext";
+import Personal from "./components/steps/Personal";
+import Address from "./components/steps/Address";
+import Account from "./components/steps/Account";
+import Complete from "./components/steps/Complete";
 
 
 
@@ -18,13 +22,14 @@ function App(): JSX.Element {
   const displayStep = (step: number): JSX.Element | null => {
     switch (step) {
       case 1:
-        return <Account />;
+        return <Personal />;
       case 2:
-        return <Details />;
+        return <Address />;
       case 3:
-        return <Payment />;
+        return <Account/>;
       case 4:
-        return <Final />;
+        return <Complete/>
+      
       default:
         return null;
     }
@@ -47,7 +52,7 @@ function App(): JSX.Element {
         <Stepper steps={steps} currentStep={currentStep} />
 
         <div className="my-10 p-10 ">
-          <UseContextProvider>{displayStep(currentStep)}</UseContextProvider>
+          <StepperContextProvider>{displayStep(currentStep)}</StepperContextProvider>
         </div>
       </div>
 
