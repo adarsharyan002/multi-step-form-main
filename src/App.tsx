@@ -13,9 +13,9 @@ function App(): JSX.Element {
   const [currentStep, setCurrentStep] = useState<number>(1);
 
   const steps: string[] = [
-    "Account Information",
-    "Personal Details",
-    "Payment",
+    "Personal Information",
+    "Address Information",
+    "Account Setup",
     "Complete",
   ];
 
