@@ -23,19 +23,20 @@ const Personal: React.FC<PersonalProps> = () => {
     const newErrors: { [key: string]: string } = {};
 
     // Validate Full Name (minimum length)
-    if (userData["fullName"]?.length < 3) {
+    if ((userData["fullName"] as string)?.length < 3) {
       newErrors["fullName"] = "Full Name must be at least 3 characters";
       valid = false;
     }
+    
 
-    if (userData["username"]?.length < 5) {
+    if ((userData["username"]as string)?.length < 5) {
       newErrors["username"] = "Username must be at least 5 characters";
       valid = false;
     }
 
     // Validate Email Address
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    if (!emailRegex.test(userData["email"])) {
+    if (!emailRegex.test((userData["email"]as string))) {
       newErrors["email"] = "Invalid Email Address";
       valid = false;
     }

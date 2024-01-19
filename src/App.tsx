@@ -42,7 +42,7 @@ function App(): JSX.Element {
     }
   };
 
-  const handleClick = (direction: "next" | "prev"): void => {
+  const handleClick = (direction: "next" | "prev" | undefined): void => {
     let newStep = currentStep;
   
     if (direction === "next" && inputValidation) {

@@ -21,13 +21,13 @@ const Address: React.FC<AddressProps> = () => {
     const newErrors: { [key: string]: string } = {};
 
     // Validate Street Address (minimum length)
-    if (userData["streetAddress"]?.length < 5) {
+    if ((userData["streetAddress"]as string)?.length < 5) {
       newErrors["streetAddress"] = "Street Address must be at least 5 characters";
       valid = false;
     }
 
     // Validate City (minimum length)
-    if (userData["city"]?.length < 3) {
+    if ((userData["city"]as string)?.length < 3) {
       newErrors["city"] = "City must be at least 3 characters";
       valid = false;
     }
@@ -40,7 +40,7 @@ const Address: React.FC<AddressProps> = () => {
 
     // Validate Zip Code (numeric)
     const zipCodeRegex = /^\d+$/;
-    if (!zipCodeRegex.test(userData["zipCode"])) {
+    if (!zipCodeRegex.test((userData["zipCode"]as string))) {
       newErrors["zipCode"] = "Zip Code must be numeric";
       valid = false;
     }

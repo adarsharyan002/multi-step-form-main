@@ -21,13 +21,13 @@ const Account: React.FC<AccountProps> = () => {
     const newErrors: { [key: string]: string } = {};
 
     // Validate Username (minimum length)
-    if (userData["username"]?.length < 5) {
+    if ((userData["username"] as string)?.length < 5) {
       newErrors["username"] = "Username must be at least 5 characters";
       valid = false;
     }
 
     // Validate Password (minimum length)
-    if (userData["password"]?.length < 8) {
+    if ((userData["password"]as string)?.length < 8) {
       newErrors["password"] = "Password must be at least 8 characters";
       valid = false;
     }
