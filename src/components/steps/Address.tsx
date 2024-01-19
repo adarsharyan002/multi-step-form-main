@@ -4,7 +4,8 @@ import { useStepperContext } from "../../contexts/useStepperContext";
 interface AddressProps {}
 
 const Address: React.FC<AddressProps> = () => {
-  const { userData, setUserData } = useStepperContext();
+  const { userData, setUserData ,setInputValidation,inputValidation} = useStepperContext();
+  
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,13 +21,13 @@ const Address: React.FC<AddressProps> = () => {
     const newErrors: { [key: string]: string } = {};
 
     // Validate Street Address (minimum length)
-    if (userData["streetAddress"].length < 5) {
+    if (userData["streetAddress"]?.length < 5) {
       newErrors["streetAddress"] = "Street Address must be at least 5 characters";
       valid = false;
     }
 
     // Validate City (minimum length)
-    if (userData["city"].length < 3) {
+    if (userData["city"]?.length < 3) {
       newErrors["city"] = "City must be at least 3 characters";
       valid = false;
     }
@@ -45,6 +46,7 @@ const Address: React.FC<AddressProps> = () => {
     }
 
     setErrors(newErrors);
+    setInputValidation(valid)
     return valid;
   };
 
@@ -98,8 +100,8 @@ const Address: React.FC<AddressProps> = () => {
             className="w-full appearance-none p-1 px-2 text-gray-800 outline-none"
           >
             <option value="">Select State</option>
-            {/* Add your state options here */}
-          {/* </select> */}
+          
+          </select> */}
           {/* Example: */}
           <input
             onChange={handleChange}
@@ -132,7 +134,10 @@ const Address: React.FC<AddressProps> = () => {
           )}
         </div>
       </div>
-      <button onClick={validateInputs}>Submit</button>
+      <div className="m-2">
+      <button className={`p-2 rounded-lg text-sm text-white ${inputValidation ? 'bg-green-500' : 'bg-red-500'}`} onClick={validateInputs}>Validate</button>
+
+</div>
     </div>
   );
 };

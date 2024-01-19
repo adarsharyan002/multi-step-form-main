@@ -4,7 +4,7 @@ import { useStepperContext } from "../../contexts/useStepperContext";
 interface AccountProps {}
 
 const Account: React.FC<AccountProps> = () => {
-  const { userData, setUserData } = useStepperContext();
+  const { userData, setUserData , setInputValidation,inputValidation} = useStepperContext();
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -14,19 +14,20 @@ const Account: React.FC<AccountProps> = () => {
     setErrors({ ...errors, [name]: "" });
     
   };
+  
 
   const validateInputs = () => {
     let valid = true;
     const newErrors: { [key: string]: string } = {};
 
     // Validate Username (minimum length)
-    if (userData["username"].length < 5) {
+    if (userData["username"]?.length < 5) {
       newErrors["username"] = "Username must be at least 5 characters";
       valid = false;
     }
 
     // Validate Password (minimum length)
-    if (userData["password"].length < 8) {
+    if (userData["password"]?.length < 8) {
       newErrors["password"] = "Password must be at least 8 characters";
       valid = false;
     }
@@ -38,6 +39,7 @@ const Account: React.FC<AccountProps> = () => {
     }
 
     setErrors(newErrors);
+    setInputValidation(valid)
     return valid;
   };
 
@@ -96,7 +98,10 @@ const Account: React.FC<AccountProps> = () => {
           )}
         </div>
       </div>
-      <button onClick={validateInputs}>Submit</button>
+      <div className="m-2">
+      <button className={`p-2 rounded-lg text-sm text-white ${inputValidation ? 'bg-green-500' : 'bg-red-500'}`} onClick={validateInputs}>Validate</button>
+
+</div>
     </div>
   );
 };

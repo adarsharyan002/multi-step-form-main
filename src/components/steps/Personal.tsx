@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useStepperContext } from "../../contexts/useStepperContext";
 
-interface PersonalProps {}
+interface PersonalProps {
+
+}
 
 const Personal: React.FC<PersonalProps> = () => {
-  const { userData, setUserData } = useStepperContext();
+  const { userData, setUserData ,setInputValidation,inputValidation} = useStepperContext();
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -12,6 +14,7 @@ const Personal: React.FC<PersonalProps> = () => {
     setUserData({ ...userData, [name]: value });
     // Clear the error message when the user starts typing
     setErrors({ ...errors, [name]: "" });
+    
   
   };
 
@@ -20,8 +23,13 @@ const Personal: React.FC<PersonalProps> = () => {
     const newErrors: { [key: string]: string } = {};
 
     // Validate Full Name (minimum length)
-    if (userData["fullName"].length < 3) {
+    if (userData["fullName"]?.length < 3) {
       newErrors["fullName"] = "Full Name must be at least 3 characters";
+      valid = false;
+    }
+
+    if (userData["username"]?.length < 5) {
+      newErrors["username"] = "Username must be at least 5 characters";
       valid = false;
     }
 
@@ -39,6 +47,7 @@ const Personal: React.FC<PersonalProps> = () => {
     }
 
     setErrors(newErrors);
+    setInputValidation(valid);
     return valid;
   };
 
@@ -97,7 +106,11 @@ const Personal: React.FC<PersonalProps> = () => {
           <div className="text-red-500 text-sm">{errors["dob"]}</div>
         )}
       </div>
-      <button onClick={validateInputs}>Submit</button>
+      <div className="m-2">
+         <button className={`p-2 rounded-lg text-sm text-white ${inputValidation ? 'bg-green-500' : 'bg-red-500'}`} onClick={validateInputs}>Validate</button>
+
+</div>
+      
     </div>
   );
 };
