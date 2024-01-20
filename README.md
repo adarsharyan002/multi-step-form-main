@@ -36,7 +36,7 @@ To get the client-side of the project up and running, follow these steps:
 
 ## Additional Notes
 
-- The client-side code resides in the `client` directory, while the server-side code is located in the `server` directory.
+
 - Customize and modify the code to suit your project requirements.
 
 
